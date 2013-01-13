@@ -1,0 +1,10 @@
+---
+jobs:
+- postgres
+- nats
+- router
+- dea
+- cloud_controller
+- stager
+- postgresql_node
+- postgresql_gateway

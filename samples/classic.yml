@@ -1,0 +1,103 @@
+---
+# see jobs/micro/monit.yml
+jobs:
+  - micro_classic
+properties:
+  micro: true
+  domain: vcap.me
+  env:
+  networks:
+    apps: local
+    management: local
+  dea:
+    max_memory: 1024
+  nats:
+    user: nats
+    password: nats
+    address: 127.0.0.1
+    port: 4222
+  router:
+    client_inactivity_timeout: 600
+    app_inactivity_timeout: 600
+    local_route: 127.0.0.1
+    status:
+      port: 8080
+      user: router
+      password: router1234
+  stager:
+    max_staging_duration: 120
+    max_active_tasks: 20
+    queues:
+    - staging
+  postgresql_gateway:
+    ip_route: 127.0.0.1
+    admin_user: psql_admin
+    admin_passwd_hash:
+    token:
+    supported_versions: ["9.0"]
+    version_aliases:
+      current: "9.0"
+  postgresql_node:
+    ip_route: 127.0.0.1
+    admin_user: psql_admin
+    admin_passwd_hash:
+    available_storage: 2048
+    max_db_size: 256
+    max_long_tx: 30
+    supported_versions: ["9.0"]
+    default_version: "9.0"
+  postgresql_server:
+    max_connections: 30
+    listen_address: 127.0.0.1
+  db: ccdb
+  ccdb:
+    template: postgres
+    address: 127.0.0.1
+    port: 2544
+    databases:
+    - tag: cc
+      name: appcloud
+    # - tag: acm
+    #   name: acm
+    # - tag: uaa
+    #   name: uaa
+    roles:
+    - name: root
+      password: ccdbroot
+      tag: admin
+    # - name: acm
+    #   password:
+    #   tag: acm
+    # - name: uaa
+    #   password:
+    #   tag: uaa
+  cc:
+    description: "VMware's Micro Cloud Application Platform"
+    srv_api_uri: http://api.vcap.me
+    password:
+    token:
+    allow_debug: true
+    allow_registration: true
+    admins:
+    - drnic@starkandwayne.com
+    admin_account_capacity:
+      memory: 2048
+      app_uris: 32
+      services: 16
+      apps: 16
+    default_account_capacity:
+      memory: 2048
+      app_uris: 32
+      services: 16
+      apps: 16
+    new_stager_percent: 100
+    staging_upload_user:
+    staging_upload_password:
+    # uaa:
+    #   enabled: true
+    #   resource_id: cloud_controller
+    #   token_creation_email_filter: [""]
+    service_extension:
+      service_lifecycle:
+        max_upload_size: 5
+    use_nginx: false
