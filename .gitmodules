@@ -23,8 +23,9 @@
   path = src/cloud_controller
   url = https://github.com/cloudfoundry/cloud_controller.git
 [submodule "src/cloud_controller_ng"]
-  path = src/cloud_controller_ng
-  url = https://github.com/cloudfoundry/cloud_controller_ng.git
+	path = src/cloud_controller_ng
+	url = https://github.com/drnic/cloud_controller_ng.git
+	branch = openstack_blobstore
 [submodule "src/tests"]
   path = src/tests
   url = https://github.com/cloudfoundry/vcap-yeti.git
