@@ -28,7 +28,10 @@ properties:
     default: 15
   nats.machines:
     description: "IP of each NATS cluster member."
-  syslog_aggregator.address:
-    description: "The address of the syslog_aggregator job."
-  syslog_aggregator.port:
-    description: "The port used by the syslog_aggregator job."
+    syslog_aggregator.address:
+      description: "IP address of syslog aggregator"
+    syslog_aggregator.port:
+      description: "port of syslog aggregator"
+    syslog_aggregator.facility:
+      description: "Filter the set of syslog messages sent to syslog_aggregator. Use '*' for all messages."
+      default: "vcap."

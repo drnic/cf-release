@@ -10,8 +10,13 @@ packages:
 - dea_logging_agent
 - syslog_aggregator
 properties:
-  syslog_aggregator:
-    description:
+  syslog_aggregator.address:
+    description: "IP address of syslog aggregator"
+  syslog_aggregator.port:
+    description: "port of syslog aggregator"
+  syslog_aggregator.facility:
+    description: "Filter the set of syslog messages sent to syslog_aggregator. Use '*' for all messages."
+    default: "vcap."
   dea_logging_agent.debug:
     description: boolean value to turn on verbose mode
     default: false

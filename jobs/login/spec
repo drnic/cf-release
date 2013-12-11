@@ -65,9 +65,12 @@ properties:
   networks.apps:
     description: "The App network name"
   syslog_aggregator.address:
-    description: "IP address for syslog aggregator"
+    description: "IP address of syslog aggregator"
   syslog_aggregator.port:
-    description: "Port of syslog aggregator"
+    description: "port of syslog aggregator"
+  syslog_aggregator.facility:
+    description: "Filter the set of syslog messages sent to syslog_aggregator. Use '*' for all messages."
+    default: "vcap."
   uaa.clients.login.secret:
     description:
   uaa.dump_requests:

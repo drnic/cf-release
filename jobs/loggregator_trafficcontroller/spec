@@ -10,8 +10,13 @@ packages:
 - loggregator_trafficcontroller
 - syslog_aggregator
 properties:
-  syslog_aggregator:
-    description:
+  syslog_aggregator.address:
+    description: "IP address of syslog aggregator"
+  syslog_aggregator.port:
+    description: "port of syslog aggregator"
+  syslog_aggregator.facility:
+    description: "Filter the set of syslog messages sent to syslog_aggregator. Use '*' for all messages."
+    default: "vcap."
   traffic_controller.zone:
     description: Zone of the loggregator_trafficcontroller
   traffic_controller.host:

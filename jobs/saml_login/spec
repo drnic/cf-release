@@ -100,9 +100,12 @@ properties:
   env.no_proxy:
     description:
   syslog_aggregator.address:
-    description:
+    description: "IP address of syslog aggregator"
   syslog_aggregator.port:
-    description:
+    description: "port of syslog aggregator"
+  syslog_aggregator.facility:
+    description: "Filter the set of syslog messages sent to syslog_aggregator. Use '*' for all messages."
+    default: "vcap."
   login.port:
     description:
     default: 8080

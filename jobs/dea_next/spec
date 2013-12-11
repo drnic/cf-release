@@ -74,8 +74,13 @@ properties:
   disk_quota_enabled:
     description: "disk quota must be disabled to use warden-inside-warden with the warden cpi"
     default: true
-  syslog_aggregator:
-    description: "Syslog aggregator stuff"
+  syslog_aggregator.address:
+    description: "IP address of syslog aggregator"
+  syslog_aggregator.port:
+    description: "port of syslog aggregator"
+  syslog_aggregator.facility:
+    description: "Filter the set of syslog messages sent to syslog_aggregator. Use '*' for all messages."
+    default: "vcap."
   loggregator_endpoint.host:
     description: "The host used to emit messages to the Loggregator"
   loggregator_endpoint.port:
