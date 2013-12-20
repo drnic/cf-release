@@ -8,3 +8,16 @@ templates:
 packages:
   - common
   - debian_nfs_server
+
+properties:
+  nfs_server.network:
+    description: Authorization via client IP range, e.g. 10.244.0.0/20 for 255.255.240.0 netmask
+  nfs_server.idmapd_domain:
+    description: The local NFSv4 domain name. An NFSv4 domain is a namespace with a unique username<->UID and groupname<->GID mapping.
+    default: localdomain
+  nfs_server.pipefs_directory:
+    description: The pipefs directory for target stemcell/OS. Default is for ubuntu stemcell.
+    default: /var/lib/nfs/rpc_pipefs
+  debian_nfs_server.no_root_squash:
+    description: Allow root user to access NFS server files (http://www.centos.org/docs/4/4.5/Security_Guide/s2-server-nfs-noroot.html)
+    default: true
