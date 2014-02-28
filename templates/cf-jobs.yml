@@ -26,7 +26,8 @@ meta:
 jobs:
   - name: ha_proxy_z1
     release: (( meta.release.name ))
-    template: haproxy
+    templates:
+      - haproxy
     instances: 0
     resource_pool: router_z1
     networks:
@@ -43,7 +44,7 @@ jobs:
 
   - name: nats_z1
     release: (( meta.release.name ))
-    template: (( merge || ["nats", "nats_stream_forwarder"] ))
+    templates: (( merge || ["nats", "nats_stream_forwarder"] ))
     instances: 1
     resource_pool: medium_z1
     networks:
@@ -54,7 +55,7 @@ jobs:
 
   - name: nats_z2
     release: (( meta.release.name ))
-    template: (( merge || ["nats", "nats_stream_forwarder"] ))
+    templates: (( merge || ["nats", "nats_stream_forwarder"] ))
     instances: 1
     resource_pool: medium_z2
     networks:
@@ -65,7 +66,8 @@ jobs:
 
   - name: logs_z1
     release: (( meta.release.name ))
-    template: syslog_aggregator
+    templates:
+      - syslog_aggregator
     instances: 0
     resource_pool: medium_z1
     persistent_disk: 100000
@@ -77,7 +79,8 @@ jobs:
 
   - name: logs_z2
     release: (( meta.release.name ))
-    template: syslog_aggregator
+    templates:
+      - syslog_aggregator
     instances: 0
     resource_pool: medium_z2
     persistent_disk: 100000
@@ -89,7 +92,8 @@ jobs:
 
   - name: stats_z1
     release: (( meta.release.name ))
-    template: collector
+    templates:
+      - collector
     instances: 1
     resource_pool: small_z1
     networks:
@@ -109,7 +113,8 @@ jobs:
 
   - name: postgres_z1
     release: (( meta.release.name ))
-    template: postgres
+    templates:
+      - postgres
     instances: 0
     resource_pool: medium_z1
     persistent_disk: 4096
@@ -121,7 +126,8 @@ jobs:
 
   - name: uaa_z1
     release: (( meta.release.name ))
-    template: uaa
+    templates:
+      - uaa
     instances: 1
     resource_pool: medium_z1
     networks:
@@ -131,7 +137,8 @@ jobs:
 
   - name: uaa_z2
     release: (( meta.release.name ))
-    template: uaa
+    templates:
+      - uaa
     instances: 1
     resource_pool: medium_z2
     networks:
@@ -151,7 +158,8 @@ jobs:
 
   - name: api_z1
     release: (( meta.release.name ))
-    template: cloud_controller_ng
+    templates:
+      - cloud_controller_ng
     instances: 1
     resource_pool: large_z1
     persistent_disk: 0
@@ -166,7 +174,8 @@ jobs:
 
   - name: api_z2
     release: (( meta.release.name ))
-    template: cloud_controller_ng
+    templates:
+      - cloud_controller_ng
     instances: 1
     resource_pool: large_z2
     persistent_disk: 0
@@ -181,7 +190,8 @@ jobs:
 
   - name: clock_global
     release: (( meta.release.name ))
-    template: cloud_controller_ng
+    templates:
+      - cloud_controller_ng
     instances: 1
     resource_pool: medium_z1
     persistent_disk: 0
@@ -197,7 +207,8 @@ jobs:
 
   - name: api_worker_z1
     release: (( meta.release.name ))
-    template: cloud_controller_ng
+    templates:
+      - cloud_controller_ng
     instances: 1
     resource_pool: small_z1
     persistent_disk: 0
@@ -214,7 +225,8 @@ jobs:
 
   - name: api_worker_z2
     release: (( meta.release.name ))
-    template: cloud_controller_ng
+    templates:
+      - cloud_controller_ng
     instances: 1
     resource_pool: small_z2
     persistent_disk: 0
@@ -231,7 +243,8 @@ jobs:
 
   - name: hm_z1
     release: (( meta.release.name ))
-    template: health_manager_next
+    templates:
+      - health_manager_next
     instances: 0
     resource_pool: medium_z1
     networks:
@@ -241,7 +254,8 @@ jobs:
 
   - name: etcd_leader_z1
     release: (( meta.release.name ))
-    template: etcd
+    templates:
+      - etcd
     instances: 1
     persistent_disk: 10024
     resource_pool: medium_z1
@@ -253,7 +267,8 @@ jobs:
 
   - name: etcd_z1
     release: (( meta.release.name ))
-    template: etcd
+    templates:
+      - etcd
     instances: 1
     persistent_disk: 10024
     resource_pool: medium_z1
@@ -266,7 +281,8 @@ jobs:
 
   - name: etcd_z2
     release: (( meta.release.name ))
-    template: etcd
+    templates:
+      - etcd
     instances: 1
     persistent_disk: 10024
     resource_pool: medium_z2
@@ -279,7 +295,8 @@ jobs:
 
   - name: hm9000_z1
     release: (( meta.release.name ))
-    template: hm9000
+    templates:
+      - hm9000
     instances: 1
     resource_pool: medium_z1
     networks:
@@ -290,7 +307,8 @@ jobs:
 
   - name: hm9000_z2
     release: (( meta.release.name ))
-    template: hm9000
+    templates:
+      - hm9000
     instances: 1
     resource_pool: medium_z2
     networks:
@@ -301,7 +319,7 @@ jobs:
 
   - name: runner_z1
     release: (( meta.release.name ))
-    template: (( merge || ["dea_next", "dea_logging_agent"] ))
+    templates: (( merge || ["dea_next", "dea_logging_agent"] ))
     instances: 1
     update:
       max_in_flight: 1
@@ -316,7 +334,7 @@ jobs:
 
   - name: runner_z2
     release: (( meta.release.name ))
-    template: (( merge || ["dea_next", "dea_logging_agent"] ))
+    templates: (( merge || ["dea_next", "dea_logging_agent"] ))
     instances: 1
     update:
       max_in_flight: 1
@@ -331,7 +349,8 @@ jobs:
 
   - name: loggregator_z1
     release: (( meta.release.name ))
-    template: loggregator
+    templates:
+      - loggregator
     instances: 2
     resource_pool: medium_z1
     networks:
@@ -342,7 +361,8 @@ jobs:
 
   - name: loggregator_z2
     release: (( meta.release.name ))
-    template: loggregator
+    templates:
+      - loggregator
     instances: 2
     resource_pool: medium_z2
     networks:
@@ -353,7 +373,8 @@ jobs:
 
   - name: loggregator_trafficcontroller_z1
     release: (( meta.release.name ))
-    template: loggregator_trafficcontroller
+    templates:
+      - loggregator_trafficcontroller
     instances: 1
     resource_pool: small_z1
     networks:
@@ -366,7 +387,8 @@ jobs:
 
   - name: loggregator_trafficcontroller_z2
     release: (( meta.release.name ))
-    template: loggregator_trafficcontroller
+    templates:
+      - loggregator_trafficcontroller
     instances: 1
     resource_pool: small_z2
     networks:
@@ -379,7 +401,8 @@ jobs:
 
   - name: router_z1
     release: (( meta.release.name ))
-    template: gorouter
+    templates:
+      - gorouter
     instances: 1
     resource_pool: router_z1
     networks:
@@ -392,7 +415,8 @@ jobs:
 
   - name: router_z2
     release: (( meta.release.name ))
-    template: gorouter
+    templates:
+      - gorouter
     instances: 1
     resource_pool: router_z2
     networks:
