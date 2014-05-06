@@ -22,7 +22,16 @@ case $1 in
 
     echo $$ > $PIDFILE
 
-    <% my_ip = spec.networks.send(properties.networks.apps).ip %>
+    MY_IP=<%= my_ip = spec.networks.send(properties.networks.apps).ip %>
+    <% if_p("etcd.use_dns") do %>
+    LEADER=$(dig <%= p("etcd.machines").first %> +short)
+    if [[ "${LEADER}X" == "X" ]]; then
+      echo "Failed to resolve <%= p("etcd.machines").first %> into an IP address" > $LOG_DIR/etcd.stderr.log
+      exit 1
+    fi
+    <% else %>
+    LEADER=<%= p("etcd.machines").first %>
+    <% end %>
 
     exec chpst -u vcap:vcap /var/vcap/packages/etcd/etcd -snapshot -data-dir=$WORK_DIR \
         -addr=<%= my_ip %>:4001 \
@@ -34,8 +43,9 @@ case $1 in
           # connect to any peers.
         %> \
         <% if p("etcd.machines").length > 1 %> \
-          <% if p("etcd.machines").first != my_ip %> \
-        -peers=<%= p("etcd.machines").reject { |ip| ip == my_ip }.map { |m| "#{m}:7001" }.join(",") %> \
+          if [[ $LEADER != $MY_IP ]]; then
+            -peers=<%= p("etcd.machines").reject { |ip| ip == my_ip }.map { |m| "#{m}:7001" }.join(",") %> \
+          fi
           <% end %> \
         <% end %> \
         -peer-heartbeat-timeout=<%= p("heartbeat_interval_in_milliseconds") %>\

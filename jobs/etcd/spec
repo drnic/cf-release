@@ -15,5 +15,8 @@ properties:
     default: 1000
   etcd.machines:
     description: "IPs of etcd machines"
+  etcd.use_dns:
+    description: "etcd.machines is using hostnames rather than static IPs"
+    default: false
   networks.apps:
     description: "Used to get our IP address"
