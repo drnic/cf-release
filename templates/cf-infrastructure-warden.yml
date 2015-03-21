@@ -9,6 +9,12 @@ meta:
     name: bosh-warden-boshlite-ubuntu-trusty-go_agent
     version: latest
 
+  default_security_group_definitions:
+  - name: public_networks
+    rules:
+    - protocol: all
+      destination: 0.0.0.0-255.255.255.255
+
 update:
   canaries: 1
   max_in_flight: 50
